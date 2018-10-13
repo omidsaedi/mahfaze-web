@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="h-100" dir="rtl" lang="fa">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="هرآنچه که در ذهن دارید را حفظ کنید">
+  <meta name="author" content="میر امیر موسوی">
+  <meta name="fontiran.com:license" content="AK642">
+
+  <title>ورود</title>
+
+  <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css" integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz" crossorigin="anonymous">
+  <link rel='stylesheet' href='/stylesheets/style.css'>
+</head>
+
+<body class="h-100 d-flex flex-column justify-content-between">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        محفظه
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/register">ثبت‌نام</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">ورود</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="p-3" role="main">
+    <% if (failureMessage && failureMessage.length > 0) { %>
+      <div class="w-100 mw-alert mx-auto mb-5 alert alert-danger alert-dismissible fade show" role="alert">
+        <%= failureMessage %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% } %>
+    <form class="w-100 mw-form mx-auto needs-validation" action="/login" method="POST" novalidate>
+      <h1 class="h3 mb-5 text-center font-weight-normal">وارد شوید</h1>
+      <div class="form-group">
+        <label class="sr-only" for="email">ایمیل</label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="ایمیل" required>
+        <div class="invalid-feedback">
+          لطفاً یک ایمیل معتبر وارد کنید.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="password">رمز عبور</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="رمز عبور" required minlength="8">
+        <div class="invalid-feedback">
+          لطفاً یک رمز عبور با حداقل ۸ کاراکتر وارد کنید.
+        </div>
+      </div>
+      <input type="submit" class="btn btn-primary btn-lg btn-block" value="ورود">
+    </form>
+  </main>
+
+  <footer class="py-3 bg-dark text-center text-white">
+    <div class="container">
+      <p class="m-0 small">کپی‌رایت © محفظه ۱۳۹۷</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+  <script src="/javascripts/form-validation.js"></script>
+</body>
+
+</html>

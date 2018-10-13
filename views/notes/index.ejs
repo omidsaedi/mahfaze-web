@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="h-100" dir="rtl" lang="fa">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="هرآنچه که در ذهن دارید را حفظ کنید">
+  <meta name="author" content="میر امیر موسوی">
+  <meta name="fontiran.com:license" content="AK642">
+
+  <title>محفظه</title>
+
+  <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css" integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz" crossorigin="anonymous">
+  <link rel='stylesheet' href='/stylesheets/style.css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body class="fluid d-flex flex-column pt-navbar" style="background-color: #ededed;">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #008577;">
+    <div class="container">
+      <a class="navbar-brand" href="#">محفظه</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <form class="form-inline ml-auto my-2 my-lg-0" action="/notes/search" method="GET">
+          <input type="search" class="form-control mr-sm-2" name="q" placeholder="جستجو" aria-label="جستجو">
+          <input type="submit" class="btn btn-outline-light mt-2 mt-sm-0" value="جستجو">
+        </form>
+        <ul class="navbar-nav ml-lg-3">
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">خروج</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="py-3 flex-grow-1" role="main">
+    <div class="container">
+      <div class="card-columns">
+        <% notes.forEach(function(note) { %>
+          <a class="note outline-0 text-inherit" href="/notes/<%= note.id %>/edit">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body"><%= note.text %></div>
+            </div>
+          </a>
+        <% }); %>
+      </div>
+    </div>
+    <button id="add" class="fab position-fixed" style="left: 24px; bottom: 0;"><i class="material-icons">add</i></button>
+    <form id="add-form" class="d-none" action="/notes" method="POST">
+      <input type="hidden" name="text">
+    </form>
+  </main>
+
+  <footer class="py-3 bg-dark text-center text-white">
+    <div class="container">
+      <p class="m-0 small">کپی‌رایت © محفظه ۱۳۹۷</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+  <script>
+    function positionFab() {
+      var footerTop = $('footer').offset().top;
+
+      var viewportTop = $(window).scrollTop();
+      var viewportBottom = viewportTop + $(window).height();
+
+      var fabBottom = (viewportBottom > footerTop ? viewportBottom - footerTop : 0) + 24;
+
+      $('#add').css('bottom', fabBottom + 'px');
+    }
+
+    $(document).ready(function() {
+      positionFab();
+
+      $('#add').click(function() {
+        $('#add-form').submit();
+      });
+
+      $('.card').hover(function() {
+        $(this).removeClass('shadow-sm').addClass('shadow');
+      }, function() {
+        $(this).removeClass('shadow').addClass('shadow-sm');
+      });
+    });
+
+    $(window).scroll(function() {
+      positionFab();
+    });
+
+    $(window).resize(function() {
+      positionFab();
+    });
+  </script>
+</body>
+
+</html>
