@@ -54,7 +54,7 @@ router.get('/notes', passport.authenticate('basic', { session: false }), functio
 
 router.post('/notes', passport.authenticate('basic', { session: false }), function(req, res) {
   req.user.createNote(req.body, {
-    fields: ['id', 'text'],
+    fields: ['id', 'text', 'createdAt', 'updatedAt', 'deletedAt'],
     overwriteTimestamps: req.body
   }).then(function(note) {
     res.status(201).send(note);
@@ -84,7 +84,7 @@ router.put('/notes/:id', passport.authenticate('basic', { session: false }), fun
     if (note) {
       if (note.user.equals(req.user)) {
         return note.update(req.body, {
-          fields: ['text'],
+          fields: ['text', 'updatedAt', 'deletedAt'],
           overwriteTimestamps: req.body
         });
       } else {
@@ -123,7 +123,7 @@ router.post('/notes/batch', passport.authenticate('basic', { session: false }), 
     var queries = [];
     req.body.inserts.forEach(function(values) {
       queries.push(req.user.createNote(values, {
-        fields: ['id', 'text'],
+        fields: ['id', 'text', 'createdAt', 'updatedAt', 'deletedAt'],
         transaction: t,
         overwriteTimestamps: values
       }));
@@ -134,7 +134,7 @@ router.post('/notes/batch', passport.authenticate('basic', { session: false }), 
           throw new Error();
         }
         return note.update(values, {
-          fields: ['text'],
+          fields: ['text', 'updatedAt', 'deletedAt'],
           transaction: t,
           overwriteTimestamps: values
         });
