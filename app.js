@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var sslRedirect = require('heroku-ssl-redirect');
 var methodOverride = require('method-override')
 var helmet = require('helmet');
 var compression = require('compression');
@@ -27,6 +28,7 @@ if (app.get('env') === 'production') {
 }
 
 app.use(logger('dev'));
+app.use(sslRedirect());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
